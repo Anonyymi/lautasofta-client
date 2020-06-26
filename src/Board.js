@@ -3,52 +3,52 @@ import React, {
     useEffect
   } from 'react';
 import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
 import './Board.css';
 import Config from './Config';
+import PostForm from './PostForm';
 import Post from './Post';
 
 function Board(props) {
   const [threads, setThreads] = useState({'status': 404, data: []});
 
   useEffect(() => {
+    if (props.board == null) {
+      return;
+    }
+
     async function fetchDataFromAPI() {
-      let res_threads = await axios(Config.api_url + '/boards/1/threads');
+      let res_threads = await axios(Config.api_url + '/boards/' + props.board.id + '/threads');
       setThreads(res_threads.data);
     };
     fetchDataFromAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="board">
-      <form id="form_submit_thread" className="form_post">
-        <div className="form_row">
-          <label>Attachment</label>
-          <input id="file" name="file" type="file" accept=".jpg,.jpeg,.png"></input>
-        </div>
-        <textarea id="message" name="message" spellcheck="false" placeholder="Message"></textarea>
-      </form>
-      <div className="threads_list">
-        <hr />
-        {threads.data.map(thread => {
-          return <div key={thread.id} className="thread_container">
-            <div className="thread">
-              <Post post={thread} />
-              {thread.posts.map(post => {
-                return <div key={post.id} className="reply">
-                  <Post post={post} />
-                </div>
-              })}
-            </div>
+      {props.board != null &&
+        <React.Fragment>
+          <div className="threads_form">
+            <PostForm submit_url={Config.api_url + '/boards/' + props.board.id + '/threads'} />
+          </div>
+          <div className="threads_list">
             <hr />
-          </div>;
-        })}
-      </div>
+            {threads.data.map(thread => (
+              <React.Fragment key={thread.id}>
+                <div className="thread">
+                  <Post post={thread} />
+                  {thread.posts.map(post => {
+                    return <div key={post.id} className="reply">
+                      <Post post={post} />
+                    </div>
+                  })}
+                </div>
+                <hr />
+              </React.Fragment>
+            ))}
+          </div>
+        </React.Fragment>
+      }
     </div>
   );
 }

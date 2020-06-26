@@ -1,16 +1,5 @@
-import React, {
-    useState,
-    useEffect
-  } from 'react';
-import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import React from 'react';
 import './Post.css';
-import Config from './Config';
 
 function Post(props) {
   return (

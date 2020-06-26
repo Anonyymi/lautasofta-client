@@ -6,8 +6,7 @@ import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import './App.css';
 import Config from './Config';
@@ -30,11 +29,16 @@ function App() {
       <BoardsList boards={boards} />
       <Switch>
         <Route exact path="/">
-          <span>test</span>
+          <span>index</span>
         </Route>
-        <Route exact path="/boards/:board_id">
-          <Board boards={boards} />
-        </Route>
+        <Route exact path="/boards/:board_path" render={({match}) => (
+          <React.Fragment>
+            {boards.data == null || boards.data.length === 0
+              ? <span>Loading data...</span>
+              : <Board boards={boards} board={boards.data.find(board => board.path === match.params.board_path)} />
+            }
+          </React.Fragment>
+        )}/>
       </Switch>
     </Router>
   );
