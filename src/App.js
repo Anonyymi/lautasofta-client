@@ -12,6 +12,7 @@ import './App.css';
 import Config from './Config';
 import BoardsList from './BoardsList';
 import Board from './Board';
+import Thread from './Thread';
 
 function App() {
   const [config, setConfig] = useState({'status': 404, data: {}});
@@ -42,6 +43,19 @@ function App() {
                   config={config}
                   boards={boards}
                   board={boards.data.find(board => board.path === match.params.board_path)}
+                />
+            }
+          </React.Fragment>
+        )}/>
+        <Route exact path="/boards/:board_path/threads/:thread_id" render={({match}) => (
+          <React.Fragment>
+            {!config.data || !boards.data
+              ? <span>Loading data...</span>
+              : <Thread
+                  config={config}
+                  boards={boards}
+                  board={boards.data.find(board => board.path === match.params.board_path)}
+                  thread_id={match.params.thread_id}
                 />
             }
           </React.Fragment>

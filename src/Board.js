@@ -39,11 +39,9 @@ function Board(props) {
               <React.Fragment key={thread.id}>
                 <div className="thread">
                   <Post config={props.config} board={props.board} post={thread} />
-                  {thread.posts.map(post => {
-                    return <div key={post.id} className="reply">
-                      <Post config={props.config} board={props.board} post={post} />
-                    </div>
-                  })}
+                  {thread.posts.map(post => (
+                    <Post key={post.id} config={props.config} board={props.board} post={post} />
+                  ))}
                 </div>
                 <hr />
               </React.Fragment>

@@ -2,6 +2,10 @@
   margin-bottom: 4px;
 }
 
+.reply {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .post_info span {
   margin-right: 4px;
 }
@@ -23,6 +27,10 @@ a, a:visited, a:hover, a:active {
 
 .post_content .post_media img {
   object-fit: contain;
+}
+
+.post_content .post_message {
+  white-space: pre-line;
 }
 
 .post_content .post_clear {
