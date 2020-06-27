@@ -17,6 +17,10 @@
   margin-bottom: 8px;
 }
 
+.post_content .post_media img {
+  object-fit: contain;
+}
+
 .post_content .post_clear {
   clear: both;
 }
