@@ -26,7 +26,7 @@ function Board(props) {
 
   return (
     <div className="board">
-      {props.board != null &&
+      {props.config != null && props.board != null &&
         <React.Fragment>
           <div className="threads_form">
             <PostForm submit_url={Config.api_url + '/boards/' + props.board.id + '/threads'} />
@@ -36,10 +36,10 @@ function Board(props) {
             {threads.data.map(thread => (
               <React.Fragment key={thread.id}>
                 <div className="thread">
-                  <Post post={thread} />
+                  <Post config={props.config} post={thread} />
                   {thread.posts.map(post => {
                     return <div key={post.id} className="reply">
-                      <Post post={post} />
+                      <Post config={props.config} post={post} />
                     </div>
                   })}
                 </div>

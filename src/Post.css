@@ -10,3 +10,13 @@
   font-weight: bold;
   color: #117743;
 }
+
+.post_content .post_media {
+  float: left;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.post_content .post_clear {
+  clear: both;
+}

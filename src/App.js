@@ -14,10 +14,13 @@ import BoardsList from './BoardsList';
 import Board from './Board';
 
 function App() {
+  const [config, setConfig] = useState({'status': 404, data: null});
   const [boards, setBoards] = useState({'status': 404, data: []});
 
   useEffect(() => {
     async function fetchDataFromAPI() {
+      let res_config = await axios(Config.api_url + '/config');
+      setConfig(res_config.data);
       let res_boards = await axios(Config.api_url + '/boards');
       setBoards(res_boards.data);
     };
@@ -35,7 +38,11 @@ function App() {
           <React.Fragment>
             {boards.data == null || boards.data.length === 0
               ? <span>Loading data...</span>
-              : <Board boards={boards} board={boards.data.find(board => board.path === match.params.board_path)} />
+              : <Board
+                  config={config}
+                  boards={boards}
+                  board={boards.data.find(board => board.path === match.params.board_path)}
+                />
             }
           </React.Fragment>
         )}/>
