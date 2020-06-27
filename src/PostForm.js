@@ -32,7 +32,6 @@ function PostForm(props) {
         for (let key in fields) {
           form_data.append(key, fields[key]);
         }
-        form_data.append('file', file);
 
         // send put request (media)
         await axios.post(data['url'], form_data);
