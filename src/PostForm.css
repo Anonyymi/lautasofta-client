@@ -1,0 +1,19 @@
+.post_form {
+  display: inline-grid;
+  grid-template-columns: auto 512px;
+  grid-template-rows: auto 128px auto;
+  column-gap: 8px;
+}
+
+.post_form label {
+  text-align: left;
+}
+
+.post_form #message {
+  resize: none;
+}
+
+.post_form #submit {
+  width: 64px;
+}
+

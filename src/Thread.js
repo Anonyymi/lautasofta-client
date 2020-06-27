@@ -5,6 +5,7 @@ import React, {
 import axios from 'axios';
 import './Thread.css';
 import Config from './Config';
+import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
 
@@ -33,7 +34,10 @@ function Thread(props) {
         ? <span>Loading data...</span>
         :
           <React.Fragment>
-            <PostForm config={props.config} submit_url={Config.api_url + '/boards/' + props.board.id + '/threads/' + props.thread_id + '/posts'} />
+            <div className="thread_header_container">
+              <BoardTitle board={props.board} />
+              <PostForm config={props.config} submit_url={Config.api_url + '/boards/' + props.board.id + '/threads/' + props.thread_id + '/posts'} />
+            </div>
             <hr />
             {posts.data.map(post => (
               <React.Fragment key={post.id}>

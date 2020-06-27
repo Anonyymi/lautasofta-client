@@ -3,7 +3,7 @@ import './Post.css';
 
 function Post(props) {
   return (
-    <div key={props.post.id} className={props.post.thread_id ? 'post reply' : 'post'}>
+    <div className={props.post.thread_id ? 'post reply' : 'post'}>
       <div className="post_info">
         <span className="name">Anonymous</span>
         <span className="datetime_created">{props.post.datetime_created}</span>
