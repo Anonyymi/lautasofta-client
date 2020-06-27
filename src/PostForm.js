@@ -51,7 +51,7 @@ function PostForm(props) {
     <form id="post_form" className="post_form" onSubmit={onSubmit}>
       <div className="row">
         <label>Attachment</label>
-        <input id="file" name="file" type="file" accept=".jpg,.jpeg,.png,.gif" onChange={onChangeFile}></input>
+        <input id="file" name="file" type="file" accept={props.config.data['MEDIA_CONTENT_TYPES'].join(',')} onChange={onChangeFile}></input>
       </div>
       <div className="row">
         <textarea id="message" name="message" spellCheck="false" placeholder="Message"></textarea>

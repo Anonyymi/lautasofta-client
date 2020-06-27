@@ -11,6 +11,10 @@
   color: #117743;
 }
 
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
 .post_content .post_media {
   float: left;
   margin-right: 8px;

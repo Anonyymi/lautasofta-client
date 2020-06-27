@@ -14,7 +14,7 @@ import BoardsList from './BoardsList';
 import Board from './Board';
 
 function App() {
-  const [config, setConfig] = useState({'status': 404, data: null});
+  const [config, setConfig] = useState({'status': 404, data: {}});
   const [boards, setBoards] = useState({'status': 404, data: []});
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function App() {
         </Route>
         <Route exact path="/boards/:board_path" render={({match}) => (
           <React.Fragment>
-            {boards.data == null || boards.data.length === 0
+            {!config.data || !boards.data
               ? <span>Loading data...</span>
               : <Board
                   config={config}
