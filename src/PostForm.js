@@ -15,12 +15,12 @@ function PostForm(props) {
     let form_extension = file != null ? file.name.split('.').pop() : null;
 
     // send post request (thread)
-    let res_submit = await axios.post(props.submit_url, {
-      message: form_message,
-      extension: form_extension
-    });
+    try {
+      let res_submit = await axios.post(props.submit_url, {
+        message: form_message,
+        extension: form_extension
+      });
 
-    if (res_submit.status === 200) {
       let data = res_submit.data['data'];
 
       // upload media file if included
@@ -36,10 +36,12 @@ function PostForm(props) {
         // send put request (media)
         await axios.post(data['url'], form_data);
       }
-    }
 
-    // refresh page
-    window.location.reload();
+      // refresh page
+      window.location.reload();
+    } catch (err) {
+      console.error(err.response);
+    }
   };
 
   let onChangeFile = async (e) => {

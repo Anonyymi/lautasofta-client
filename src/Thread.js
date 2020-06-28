@@ -24,8 +24,12 @@ function Thread(props) {
     }
 
     async function fetchDataFromAPI() {
-      let res_posts = await axios(Config.api_url + '/boards/' + props.board.id + '/threads/' + props.thread_id + '/posts');
-      setPosts(res_posts.data);
+      try {
+        let res_posts = await axios(Config.api_url + '/boards/' + props.board.id + '/threads/' + props.thread_id + '/posts');
+        setPosts(res_posts.data);
+      } catch (err) {
+        console.error(err.response);
+      }
     };
     fetchDataFromAPI();
   }, [props]);

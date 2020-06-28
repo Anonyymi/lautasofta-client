@@ -24,8 +24,12 @@ function Board(props) {
     }
 
     async function fetchDataFromAPI() {
-      let res_threads = await axios(Config.api_url + '/boards/' + props.board.id + '/threads');
-      setThreads(res_threads.data);
+      try {
+        let res_threads = await axios(Config.api_url + '/boards/' + props.board.id + '/threads');
+        setThreads(res_threads.data);
+      } catch (err) {
+        console.error(err.response);
+      }
     };
     fetchDataFromAPI();
   }, [props]);
