@@ -1,3 +1,7 @@
 .board_header_container {
   text-align: center;
 }
+
+.board_footer_container {
+  text-align: right;
+}

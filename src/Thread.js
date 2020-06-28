@@ -8,10 +8,12 @@ import Config from './Config';
 import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
+import DeleteForm from './DeleteForm';
 
 function Thread(props) {
   const [render, setRender] = useState(false);
   const [posts, setPosts] = useState({'status': 404, data: []});
+  const [selected] = useState([]);
 
   useEffect(() => {
     if (props.config && props.board && props.thread_id) {
@@ -42,10 +44,13 @@ function Thread(props) {
             {posts.data.map(post => (
               <React.Fragment key={post.id}>
                 <div className="post">
-                  <Post config={props.config} board={props.board} post={post} />
+                  <Post config={props.config} board={props.board} post={post} selected={selected} />
                 </div>
               </React.Fragment>
             ))}
+            <div className="thread_footer_container">
+              <DeleteForm submit_url={Config.api_url + '/posts'} selected={selected} />
+            </div>
           </React.Fragment>
       }
     </div>

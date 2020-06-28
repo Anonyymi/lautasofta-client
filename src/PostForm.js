@@ -53,7 +53,7 @@ function PostForm(props) {
       <label></label>
       <textarea id="message" name="message" spellCheck="false" placeholder="Message"></textarea>
       <label></label>
-      <input id="submit" type="submit" value="Submit"></input>
+      <input id="submit_post" type="submit" value="Submit"></input>
     </form>
   );
 }

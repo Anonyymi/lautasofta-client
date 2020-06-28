@@ -2,9 +2,24 @@ import React from 'react';
 import './Post.css';
 
 function Post(props) {
+  let selectPost = async (e) => {
+    let selected = e.target.checked;
+    
+    if (selected) {
+      props.selected.push(props.post);
+    } else {
+      let selected_idx = props.selected.findIndex(post => post.id === props.post.id);
+
+      if (selected_idx > -1) {
+        props.selected.splice(selected_idx, 1);
+      }
+    }
+  };
+
   return (
     <div className={props.post.thread_id ? 'post reply' : 'post'}>
       <div className="post_info">
+        <input className="select" type="checkbox" name="select" onClick={selectPost}></input>
         <span className="name">Anonymous</span>
         <span className="datetime_created">{props.post.datetime_created}</span>
         {props.post.thread_id == null

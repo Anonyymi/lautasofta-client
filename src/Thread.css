@@ -1,3 +1,7 @@
 .thread_header_container {
   text-align: center;
 }
+
+.thread_footer_container {
+  text-align: right;
+}
