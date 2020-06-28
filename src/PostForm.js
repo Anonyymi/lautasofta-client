@@ -27,14 +27,18 @@ function PostForm(props) {
       if (data['url'] != null) {
         // prepare form data
         let fields = data['fields'];
-        fields['file'] = file;
         let form_data = new FormData();
         for (let key in fields) {
-          form_data.append(key, fields[key]);
+          form_data.set(key, fields[key]);
         }
+        form_data.append('file', file);
 
         // send put request (media)
-        await axios.post(data['url'], form_data);
+        await axios.post(data['url'], form_data, {
+          headers: {
+            'x-amz-acl': 'public-read'
+          }
+        });
       }
 
       // refresh page
