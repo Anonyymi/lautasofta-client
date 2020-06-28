@@ -9,11 +9,10 @@
   text-align: left;
 }
 
-.post_form #message {
+#post_form_message {
   resize: none;
 }
 
-.post_form #submit_post {
+#submit_post {
   width: 64px;
 }
-

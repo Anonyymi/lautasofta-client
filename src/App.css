@@ -1,0 +1,15 @@
+body {
+  font-size: 10pt;
+}
+
+a {
+  text-decoration: none;
+}
+
+a, a:visited {
+  color: inherit;
+}
+
+a:hover, a:active {
+  color: rgba(128, 128, 128, 1.0);
+}

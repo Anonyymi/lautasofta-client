@@ -16,6 +16,11 @@ function Post(props) {
     }
   };
 
+  let referPost = async (e) => {
+    let post_form_message = document.getElementById('post_form_message');
+    post_form_message.value += '>>' + props.post.id + '\n';
+  };
+
   return (
     <div className={props.post.thread_id ? 'post reply' : 'post'}>
       <div className="post_info">
@@ -23,9 +28,10 @@ function Post(props) {
         <span className="name">Anonymous</span>
         <span className="datetime_created">{props.post.datetime_created}</span>
         {props.post.thread_id == null
-          ? <a className="id" href={'/boards/' + props.board.path + '/threads/' + props.post.id}>{'No.' + props.post.id}</a>
-          : <span className="id">{'No.' + props.post.id}</span>
+          ? <a className="id_link" href={'/boards/' + props.board.path + '/threads/' + props.post.id}>{'No.'}</a>
+          : <span className="id">{'No.'}</span>
         }
+        <a className="id_ref" href="#/" onClick={referPost}>{props.post.id}</a>
       </div>
       <div className="post_content">
         {props.post.data_filepath != null &&

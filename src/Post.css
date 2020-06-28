@@ -10,13 +10,13 @@
   margin-right: 4px;
 }
 
+.post_info a {
+  margin-right: 4px;
+}
+
 .post_info .name {
   font-weight: bold;
   color: #117743;
-}
-
-a, a:visited, a:hover, a:active {
-  color: inherit;
 }
 
 .post_content .post_media {
