@@ -9,6 +9,7 @@ import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
 import DeleteForm from './DeleteForm';
+import Pagination from './Pagination';
 
 function Board(props) {
   const [render, setRender] = useState(false);
@@ -25,7 +26,7 @@ function Board(props) {
 
     async function fetchDataFromAPI() {
       try {
-        let res_threads = await axios(Config.api_url + '/boards/' + props.board.id + '/threads');
+        let res_threads = await axios(Config.api_url + '/boards/' + props.board.id + '/threads' + window.location.search);
         setThreads(res_threads.data);
       } catch (err) {
         console.error(err.response);
@@ -57,7 +58,12 @@ function Board(props) {
               </React.Fragment>
             ))}
             <div className="board_footer_container">
-              <DeleteForm submit_url={Config.api_url + '/posts'} selected={selected} />
+              <div className="board_footer_container_left">
+                <Pagination pages={10} items={props.config.data['MAX_THREADS_PER_PAGE']} />
+              </div>
+              <div className="board_footer_container_right">
+                <DeleteForm submit_url={Config.api_url + '/posts'} selected={selected} />
+              </div>
             </div>
           </React.Fragment>
       }
