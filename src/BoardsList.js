@@ -19,7 +19,7 @@ function BoardsList(props) {
   return (
     <div className="boards_list">
       {render === false
-        ? <span>Loading data...</span>
+        ? <span></span>
         :
           <React.Fragment>
             <span>[</span>

@@ -46,7 +46,7 @@ function App() {
         <Route exact path="/boards/:board_path" render={({match}) => (
           <React.Fragment>
             {!config.data || !boards.data
-              ? <span>Loading data...</span>
+              ? <span></span>
               : <Board
                   config={config}
                   boards={boards}
@@ -58,7 +58,7 @@ function App() {
         <Route exact path="/boards/:board_path/threads/:thread_id" render={({match}) => (
           <React.Fragment>
             {!config.data || !boards.data
-              ? <span>Loading data...</span>
+              ? <span></span>
               : <Thread
                   config={config}
                   boards={boards}

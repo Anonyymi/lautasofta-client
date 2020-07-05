@@ -42,7 +42,7 @@ function Thread(props) {
   return (
     <div className="thread">
       {render === false
-        ? <span>Loading data...</span>
+        ? <span></span>
         :
           <React.Fragment>
             <div className="thread_header_container">

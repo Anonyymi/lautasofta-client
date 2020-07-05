@@ -43,7 +43,7 @@ function Board(props) {
   return (
     <div className="board">
       {render === false
-        ? <span>Loading data...</span>
+        ? <span></span>
         :
           <React.Fragment>
             <div className="board_header_container">
