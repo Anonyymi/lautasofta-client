@@ -2,31 +2,39 @@ import React, {
   useState,
   useEffect
 } from 'react';
-import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
+import {
+  useToasts
+} from 'react-toast-notifications';
 import './App.css';
-import Config from './Config';
+import Api from './Api';
 import BoardsList from './BoardsList';
 import Board from './Board';
 import Thread from './Thread';
 
 function App() {
+  const {addToast} = useToasts();
   const [config, setConfig] = useState({'status': 404, data: {}});
   const [boards, setBoards] = useState({'status': 404, data: []});
 
   useEffect(() => {
-    async function fetchDataFromAPI() {
-      let res_config = await axios(Config.api_url + '/config');
-      setConfig(res_config.data);
-      let res_boards = await axios(Config.api_url + '/boards');
-      setBoards(res_boards.data);
-    };
     fetchDataFromAPI();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const fetchDataFromAPI = async (board_id, thread_id) => {
+    try {
+      setConfig(await Api.getConfig());
+      setBoards(await Api.getBoards());
+    } catch (err) {
+      addToast('Failure fetching config/boards!', {appearance: 'error'});
+    }
+  };
 
   return (
     <Router>

@@ -1,10 +1,12 @@
 import React, {
-    useState,
-    useEffect
-  } from 'react';
-import axios from 'axios';
+  useState,
+  useEffect
+} from 'react';
+import {
+  useToasts
+} from 'react-toast-notifications';
 import './Board.css';
-import Config from './Config';
+import Api from './Api';
 import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
@@ -12,6 +14,7 @@ import DeleteForm from './DeleteForm';
 import Pagination from './Pagination';
 
 function Board(props) {
+  const {addToast} = useToasts();
   const [render, setRender] = useState(false);
   const [threads, setThreads] = useState({'status': 404, data: []});
   const [selected] = useState([]);
@@ -24,16 +27,18 @@ function Board(props) {
       return;
     }
 
-    async function fetchDataFromAPI() {
-      try {
-        let res_threads = await axios(Config.api_url + '/boards/' + props.board.id + '/threads' + window.location.search);
-        setThreads(res_threads.data);
-      } catch (err) {
-        console.error(err.response);
-      }
-    };
-    fetchDataFromAPI();
-  }, [props]);
+    fetchDataFromAPI(props.board.id, window.location.search);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.board, window.location.search]);
+
+  const fetchDataFromAPI = async (board_id, query) => {
+    try {
+      setThreads(await Api.getThreads(props.board.id, query));
+    } catch (err) {
+      addToast('Failure fetching board data, status: ' + err.status, {appearance: 'error'});
+    }
+  };
 
   return (
     <div className="board">
@@ -43,7 +48,7 @@ function Board(props) {
           <React.Fragment>
             <div className="board_header_container">
               <BoardTitle board={props.board} />
-              <PostForm config={props.config} submit_url={Config.api_url + '/boards/' + props.board.id + '/threads'} />
+              <PostForm config={props.config} board={props.board} />
             </div>
             <hr />
             {threads.data.map(thread => (
@@ -62,7 +67,7 @@ function Board(props) {
                 <Pagination pages={10} items={props.config.data['MAX_THREADS_PER_PAGE']} />
               </div>
               <div className="board_footer_container_right">
-                <DeleteForm submit_url={Config.api_url + '/posts'} selected={selected} />
+                <DeleteForm selected={selected} />
               </div>
             </div>
           </React.Fragment>

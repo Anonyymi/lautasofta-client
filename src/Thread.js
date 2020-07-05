@@ -1,16 +1,19 @@
 import React, {
-    useState,
-    useEffect
-  } from 'react';
-import axios from 'axios';
+  useState,
+  useEffect
+} from 'react';
+import {
+  useToasts
+} from 'react-toast-notifications';
 import './Thread.css';
-import Config from './Config';
+import Api from './Api';
 import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
 import DeleteForm from './DeleteForm';
 
 function Thread(props) {
+  const {addToast} = useToasts();
   const [render, setRender] = useState(false);
   const [posts, setPosts] = useState({'status': 404, data: []});
   const [selected] = useState([]);
@@ -23,16 +26,18 @@ function Thread(props) {
       return;
     }
 
-    async function fetchDataFromAPI() {
-      try {
-        let res_posts = await axios(Config.api_url + '/boards/' + props.board.id + '/threads/' + props.thread_id + '/posts');
-        setPosts(res_posts.data);
-      } catch (err) {
-        console.error(err.response);
-      }
-    };
-    fetchDataFromAPI();
-  }, [props]);
+    fetchDataFromAPI(props.board.id, props.thread_id);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.board, props.thread_id]);
+
+  const fetchDataFromAPI = async (board_id, thread_id) => {
+    try {
+      setPosts(await Api.getPosts(props.board.id, props.thread_id, ''));
+    } catch (err) {
+      addToast('Failure fetching thread data, status: ' + err.status, {appearance: 'error'});
+    }
+  };
 
   return (
     <div className="thread">
@@ -42,7 +47,7 @@ function Thread(props) {
           <React.Fragment>
             <div className="thread_header_container">
               <BoardTitle board={props.board} />
-              <PostForm config={props.config} submit_url={Config.api_url + '/boards/' + props.board.id + '/threads/' + props.thread_id + '/posts'} />
+              <PostForm config={props.config} board={props.board} thread_id={props.thread_id} />
             </div>
             <hr />
             {posts.data.map(post => (
@@ -53,7 +58,7 @@ function Thread(props) {
               </React.Fragment>
             ))}
             <div className="thread_footer_container">
-              <DeleteForm submit_url={Config.api_url + '/posts'} selected={selected} />
+              <DeleteForm selected={selected} />
             </div>
           </React.Fragment>
       }

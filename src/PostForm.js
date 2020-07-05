@@ -1,50 +1,31 @@
 import React, {
   useState
 } from 'react';
-import axios from 'axios';
+import {
+  useToasts
+} from 'react-toast-notifications';
+import Api from './Api';
 import './PostForm.css';
 
 function PostForm(props) {
+  const {addToast} = useToasts();
   const [file, setFile] = useState(null);
 
   let onSubmit = async (e) => {
     e.preventDefault();
-
-    // parse input
-    let form_message = e.target.message.value;
-    let form_extension = file != null ? file.name.split('.').pop() : null;
-
-    // send post request (thread)
+    
     try {
-      let res_submit = await axios.post(props.submit_url, {
-        message: form_message,
-        extension: form_extension
-      });
-
-      let data = res_submit.data['data'];
-
-      // upload media file if included
-      if (data['url'] != null) {
-        // prepare form data
-        let fields = data['fields'];
-        let form_data = new FormData();
-        for (let key in fields) {
-          form_data.set(key, fields[key]);
-        }
-        form_data.append('file', file);
-
-        // send put request (media)
-        await axios.post(data['url'], form_data, {
-          headers: {
-            'x-amz-acl': 'public-read'
-          }
-        });
+      // send post request
+      if (props.thread_id == null) {
+        await Api.postThread(props.board.id, e.target.message.value, file);
+      } else {
+        await Api.postPost(props.board.id, props.thread_id, e.target.message.value, file);
       }
 
       // refresh page
       window.location.reload();
     } catch (err) {
-      console.error(err.response);
+      addToast('Failure submitting post, status: ' + err.status, {appearance: 'error'});
     }
   };
 

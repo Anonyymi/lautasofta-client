@@ -8,7 +8,7 @@ function Pagination(props) {
       <React.Fragment>
         {Array.apply(null, { length: props.pages }).map((e, i) => {
           return <div key={i} className="pagination_item">
-            <span>[</span><a href={'?offset=' + i * props.items}>{i + 1}</a><span>]</span>
+            <span>[</span><a href={'?offset=' + i * props.items}>{i + 1}</a><span>] </span>
           </div>
         })}
       </React.Fragment>

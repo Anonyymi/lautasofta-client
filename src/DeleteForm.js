@@ -1,11 +1,16 @@
 import React from 'react';
-import axios from 'axios';
+import {
+  useToasts
+} from 'react-toast-notifications';
+import Api from './Api';
 import './DeleteForm.css';
 
 function DeleteForm(props) {
+  const {addToast} = useToasts();
+
   let onSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (props.selected.length === 0) {
       return;
     }
@@ -13,13 +18,17 @@ function DeleteForm(props) {
     // parse input
     let selected_ids = props.selected.map(post => post.id);
 
-    // send delete request (posts)
-    for (let id of selected_ids) {
-      await axios.delete(props.submit_url + '/' + id);
-    }
+    try {
+      // send delete requests
+      for (let id of selected_ids) {
+        await Api.deletePost(id);
+      }
 
-    // refresh page
-    window.location.reload();
+      // refresh page
+      window.location.reload();
+    } catch (err) {
+      addToast('Failure deleting post, status: ' + err.status, {appearance: 'error'});
+    }
   };
 
   return (
