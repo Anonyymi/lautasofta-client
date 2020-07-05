@@ -1,0 +1,104 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lautasofta-client template
+
+Parameters:
+  CdnDomainName:
+    Type: String
+    Default: ''
+  CdnCertificateArn:
+    Type: String
+    Default: ''
+
+Resources:
+  LogsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: LogDeliveryWrite
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Ref CdnDomainName
+      AccessControl: PublicRead
+      LoggingConfiguration:
+        DestinationBucketName: !Ref LogsBucket
+        LogFilePrefix: 'access-logs/'
+      WebsiteConfiguration:
+        IndexDocument: 'index.html'
+        ErrorDocument: 'index.html'
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 's3:GetObject'
+            Principal: '*'
+            Resource: !Sub '${WebsiteBucket.Arn}/*'
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref CdnDomainName
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - 'GET'
+            - 'HEAD'
+          CachedMethods:
+            - 'GET'
+            - 'HEAD'
+          Compress: true
+          DefaultTTL: 900
+          ForwardedValues:
+            Cookies:
+              Forward: none
+            QueryString: true
+          MaxTTL: 3600
+          MinTTL: 300
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: 'redirect-to-https'
+        DefaultRootObject: 'index.html'
+        Enabled: true
+        HttpVersion: http2
+        IPV6Enabled: false
+        Logging:
+          Bucket: !GetAtt LogsBucket.DomainName
+          IncludeCookies: false
+          Prefix: 'cdn-logs/'
+        Origins:
+          - ConnectionAttempts: 3
+            ConnectionTimeout: 3
+            CustomOriginConfig:
+              HTTPPort: 80
+              HTTPSPort: 443
+              OriginKeepaliveTimeout: 5
+              OriginProtocolPolicy: 'http-only'
+              OriginReadTimeout: 15
+              OriginSSLProtocols:
+                - 'TLSv1'
+                - 'TLSv1.1'
+                - 'TLSv1.2'
+            DomainName: !Select [2, !Split ["/", !GetAtt WebsiteBucket.WebsiteURL]]
+            Id: S3Origin
+        PriceClass: 'PriceClass_100'
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CdnCertificateArn
+          MinimumProtocolVersion: 'TLSv1.2_2018'
+          SslSupportMethod: 'sni-only'
+  Route53RecordSetGroup:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneName: !Sub '${CdnDomainName}.'
+      RecordSets:
+        - Name: !Ref CdnDomainName
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt CloudFrontDistribution.DomainName
+            EvaluateTargetHealth: false
+            HostedZoneId: Z2FDTNDATAQYW2
