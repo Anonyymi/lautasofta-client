@@ -1,0 +1,34 @@
+.admin_post {
+  margin-bottom: 4px;
+}
+
+.admin_post_info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.admin_post_info span {
+  margin-right: 4px;
+}
+
+.admin_post_info a {
+  margin-right: 4px;
+}
+
+.admin_post_info .admin_post_name {
+  font-weight: bold;
+  color: #117743;
+}
+
+.admin_post_content .admin_post_media {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.admin_post_content .admin_post_media a {
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+.admin_post_content .admin_post_message {
+  white-space: pre-line;
+}

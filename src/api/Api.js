@@ -1,5 +1,6 @@
 import axios from 'axios';
-import Config from './Config';
+import qs from 'query-string';
+import Config from '../config/Config';
 
 async function getConfig() {
   let config = {status: 404, data: {}};
@@ -27,11 +28,14 @@ async function getBoards() {
   return boards;
 }
 
-async function getThreads(board_id, query) {
+async function getThreads(board_id, limit, offset) {
   let threads = {status: 404, data: []};
 
   try {
-    threads = await axios(Config.api_url + '/boards/' + board_id + '/threads' + query);
+    threads = await axios(Config.api_url + '/boards/' + board_id + '/threads?' + qs.stringify({
+      limit: limit,
+      offset: offset
+    }));
     threads = threads.data;
   } catch (err) {
     throw err.response;
@@ -76,11 +80,14 @@ async function postThread(board_id, message, file) {
   return result;
 }
 
-async function getPosts(board_id, thread_id, query) {
+async function getPosts(board_id, thread_id, limit, offset) {
   let posts = {status: 404, data: []};
 
   try {
-    posts = await axios(Config.api_url + '/boards/' + board_id + '/threads/' + thread_id + '/posts' + query);
+    posts = await axios(Config.api_url + '/boards/' + board_id + '/threads/' + thread_id + '/posts?' + qs.stringify({
+      limit: limit,
+      offset: offset
+    }));
     posts = posts.data;
   } catch (err) {
     throw err.response;

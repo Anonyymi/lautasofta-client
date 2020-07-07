@@ -4,7 +4,7 @@ import React, {
 import {
   useToasts
 } from 'react-toast-notifications';
-import Api from './Api';
+import Api from '../api/Api';
 import './PostForm.css';
 
 function PostForm(props) {

@@ -1,0 +1,17 @@
+.admin_posts_footer_container_left {
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+}
+
+.admin_posts_footer_container_right {
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+}
+
+.admin_posts_filter_title {
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+}

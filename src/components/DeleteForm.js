@@ -2,7 +2,7 @@ import React from 'react';
 import {
   useToasts
 } from 'react-toast-notifications';
-import Api from './Api';
+import Api from '../api/Api';
 import './DeleteForm.css';
 
 function DeleteForm(props) {

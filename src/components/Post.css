@@ -14,7 +14,7 @@
   margin-right: 4px;
 }
 
-.post_info .name {
+.post_info .post_name {
   font-weight: bold;
   color: #117743;
 }
@@ -35,4 +35,16 @@
 
 .post_content .post_clear {
   clear: both;
+}
+
+@media only screen and (min-device-width: 1028px) {
+  .post_content .post_media img {
+    width: 256px;
+  }
+}
+
+@media only screen and (max-device-width: 1028px) {
+  .post_content .post_media img {
+    width: 128px;
+  }
 }

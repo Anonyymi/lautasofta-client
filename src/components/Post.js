@@ -24,14 +24,14 @@ function Post(props) {
   return (
     <div className={props.post.thread_id ? 'post reply' : 'post'}>
       <div className="post_info">
-        <input className="select" type="checkbox" name="select" onClick={selectPost}></input>
-        <span className="name">Anonymous</span>
-        <span className="datetime_created">{props.post.datetime_created}</span>
+        <input className="post_select" type="checkbox" name="select" onClick={selectPost}></input>
+        <span className="post_name">Anonymous</span>
+        <span className="post_datetime_created">{props.post.datetime_created}</span>
         {props.post.thread_id == null
-          ? <a className="id_link" href={'/boards/' + props.board.path + '/threads/' + props.post.id}>{'No.'}</a>
-          : <span className="id">{'No.'}</span>
+          ? <a className="post_id_link" href={'/boards/' + props.board_path + '/threads/' + props.post.id}>{'No.'}</a>
+          : <a className="post_id_link" href={'/boards/' + props.board_path + '/threads/' + props.post.thread_id}>{'No.'}</a>
         }
-        <a className="id_ref" href="#/" onClick={referPost}>{props.post.id}</a>
+        <a className="post_id_ref" href="#/" onClick={referPost}>{props.post.id}</a>
       </div>
       <div className="post_content">
         {props.post.data_filepath != null &&
@@ -40,8 +40,6 @@ function Post(props) {
               <img
                 src={props.config.data['MEDIA_BUCKET_URL'] + '/' + (props.post.data_thumbpath || props.post.data_filepath)}
                 alt={props.post.data_filepath}
-                width="256"
-                height="256"
               />
             </a>
           </div>

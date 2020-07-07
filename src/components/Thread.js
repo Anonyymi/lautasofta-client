@@ -6,7 +6,7 @@ import {
   useToasts
 } from 'react-toast-notifications';
 import './Thread.css';
-import Api from './Api';
+import Api from '../api/Api';
 import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
@@ -52,8 +52,8 @@ function Thread(props) {
             <hr />
             {posts.data.map(post => (
               <React.Fragment key={post.id}>
-                <div className="post">
-                  <Post config={props.config} board={props.board} post={post} selected={selected} />
+                <div className="thread_post">
+                  <Post config={props.config} board_path={props.board.path} post={post} selected={selected} />
                 </div>
               </React.Fragment>
             ))}

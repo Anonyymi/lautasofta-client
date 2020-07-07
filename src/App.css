@@ -13,3 +13,16 @@ a, a:visited {
 a:hover, a:active {
   color: rgba(128, 128, 128, 1.0);
 }
+
+.menu_container .admin_menu {
+  float: left;
+  margin-right: 4px;
+}
+
+.menu_container .boards_list {
+  float: left;
+}
+
+.menu_container .menu_container_clear {
+  clear: both;
+}

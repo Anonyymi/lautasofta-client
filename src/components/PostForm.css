@@ -1,0 +1,29 @@
+@media only screen and (min-device-width: 1028px) {
+  .post_form {
+    display: inline-grid;
+    grid-template-columns: auto 512px;
+    grid-template-rows: auto 128px auto;
+    column-gap: 8px;
+  }
+}
+
+@media only screen and (max-device-width: 1028px) {
+  .post_form {
+    display: inline-grid;
+    grid-template-columns: auto 256px;
+    grid-template-rows: auto 128px auto;
+    column-gap: 8px;
+  }
+}
+
+.post_form label {
+  text-align: left;
+}
+
+#post_form_message {
+  resize: none;
+}
+
+#submit_post {
+  width: 64px;
+}

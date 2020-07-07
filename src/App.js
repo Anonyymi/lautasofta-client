@@ -11,10 +11,12 @@ import {
   useToasts
 } from 'react-toast-notifications';
 import './App.css';
-import Api from './Api';
-import BoardsList from './BoardsList';
-import Board from './Board';
-import Thread from './Thread';
+import Api from './api/Api';
+import AdminMenu from './components/admin/AdminMenu';
+import AdminPosts from './components/admin/AdminPosts';
+import BoardsList from './components/BoardsList';
+import Board from './components/Board';
+import Thread from './components/Thread';
 
 function App() {
   const {addToast} = useToasts();
@@ -38,7 +40,13 @@ function App() {
 
   return (
     <Router>
-      <BoardsList boards={boards} />
+      <div className="menu_container">
+        {(config.data && config.data['USER_ROLE'] === 'ADMINISTRATOR') &&
+          <AdminMenu />
+        }
+        <BoardsList boards={boards} />
+        <div className="menu_container_clear"></div>
+      </div>
       <Switch>
         <Route exact path="/">
           <span>index</span>
@@ -64,6 +72,16 @@ function App() {
                   boards={boards}
                   board={boards.data.find(board => board.path === match.params.board_path)}
                   thread_id={match.params.thread_id}
+                />
+            }
+          </React.Fragment>
+        )}/>
+        <Route exact path="/admin/posts" render={({match}) => (
+          <React.Fragment>
+            {!config.data || !boards.data
+              ? <span></span>
+              : <AdminPosts
+                  config={config}
                 />
             }
           </React.Fragment>
