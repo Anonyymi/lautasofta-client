@@ -17,7 +17,7 @@ import React, {
     const [render, setRender] = useState(false);
     const [posts, setPosts] = useState({status: 404, data: []});
     const [selected] = useState([]);
-    const [searchForm, setSearchForm] = useState({deleted: true});
+    const [searchForm, setSearchForm] = useState({deleted: false});
   
     useEffect(() => {
       if (props.config) {

@@ -19,6 +19,11 @@
   color: #117743;
 }
 
+.admin_post_info .admin_post_ipv4_addr {
+  font-weight: bold;
+  color: #431177;
+}
+
 .admin_post_content .admin_post_media {
   margin-right: 8px;
   margin-bottom: 8px;

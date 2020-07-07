@@ -21,6 +21,7 @@ function AdminPost(props) {
       <div className="admin_post_info">
         <input className="admin_post_select" type="checkbox" name="select" onClick={selectPost}></input>
         <span className="admin_post_name">Anonymous</span>
+        <span className="admin_post_ipv4_addr">{props.post.ipv4_addr}</span>
         <span className="admin_post_datetime_created">{props.post.datetime_created}</span>
         <span className="admin_post_id">{'No.'}</span>
         <span className="admin_post_id_ref">{props.post.id}</span>
