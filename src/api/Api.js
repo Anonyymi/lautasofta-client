@@ -35,7 +35,7 @@ async function getThreads(board_id, limit, offset) {
     threads = await axios(Config.api_url + '/boards/' + board_id + '/threads?' + qs.stringify({
       limit: limit,
       offset: offset
-    }));
+    }, {encode: false}));
     threads = threads.data;
   } catch (err) {
     throw err.response;
@@ -87,7 +87,7 @@ async function getPosts(board_id, thread_id, limit, offset) {
     posts = await axios(Config.api_url + '/boards/' + board_id + '/threads/' + thread_id + '/posts?' + qs.stringify({
       limit: limit,
       offset: offset
-    }));
+    }, {encode: false}));
     posts = posts.data;
   } catch (err) {
     throw err.response;

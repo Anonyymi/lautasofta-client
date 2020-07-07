@@ -40,11 +40,13 @@
 @media only screen and (min-device-width: 1028px) {
   .post_content .post_media img {
     width: 256px;
+    height: 256px;
   }
 }
 
 @media only screen and (max-device-width: 1028px) {
   .post_content .post_media img {
     width: 128px;
+    height: 128px;
   }
 }

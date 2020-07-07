@@ -10,7 +10,7 @@ async function getAdminPosts(deleted, limit, offset) {
       deleted: deleted ? 1 : 0,
       limit: limit,
       offset: offset
-    }));
+    }, {encode: false}));
     posts = posts.data;
   } catch (err) {
     throw err.response;

@@ -5,6 +5,7 @@ import React, {
 import {
   useToasts
 } from 'react-toast-notifications';
+import qs from 'query-string';
 import './Board.css';
 import Api from '../api/Api';
 import BoardTitle from './BoardTitle';
@@ -27,14 +28,18 @@ function Board(props) {
       return;
     }
 
-    fetchDataFromAPI(props.board.id, window.location.search);
+    // parse params from query string
+    let qs_parsed = qs.parse(window.location.search);
+
+      // fetch data from api
+    fetchDataFromAPI(props.board.id, qs_parsed['limit'], qs_parsed['offset']);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.board, window.location.search]);
 
-  const fetchDataFromAPI = async (board_id, query) => {
+  const fetchDataFromAPI = async (board_id, limit, offset) => {
     try {
-      setThreads(await Api.getThreads(props.board.id, query));
+      setThreads(await Api.getThreads(props.board.id, limit, offset));
     } catch (err) {
       addToast('Failure fetching board data, status: ' + err.status, {appearance: 'error'});
     }
