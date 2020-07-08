@@ -19,8 +19,25 @@ async function getAdminPosts(deleted, limit, offset) {
   return posts;
 }
 
+async function getAdminReports(limit, offset) {
+  let reports = {status: 404, data: []};
+
+  try {
+    reports = await axios(Config.api_url + '/admin/reports?' + qs.stringify({
+      limit: limit,
+      offset: offset
+    }, {encode: false}));
+    reports = reports.data;
+  } catch (err) {
+    throw err.response;
+  }
+
+  return reports;
+}
+
 const AdminApi = {
-  getAdminPosts: getAdminPosts
+  getAdminPosts: getAdminPosts,
+  getAdminReports: getAdminReports
 }
 
 export default AdminApi;

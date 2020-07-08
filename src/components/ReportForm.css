@@ -1,0 +1,13 @@
+.report_form label {
+  margin-right: 4px;
+}
+
+.report_form input {
+  margin-right: 4px;
+}
+
+.report_form_title {
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+}

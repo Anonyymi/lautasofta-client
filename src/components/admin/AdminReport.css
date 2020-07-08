@@ -1,0 +1,24 @@
+.admin_report {
+  margin-bottom: 4px;
+}
+
+.admin_report_info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.admin_report_info span {
+  margin-right: 4px;
+}
+
+.admin_report_info a {
+  margin-right: 4px;
+}
+
+.admin_report_info .admin_report_ipv4_addr {
+  font-weight: bold;
+  color: #431177;
+}
+
+.admin_report_content .admin_report_reason {
+  white-space: pre-line;
+}

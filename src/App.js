@@ -14,9 +14,11 @@ import './App.css';
 import Api from './api/Api';
 import AdminMenu from './components/admin/AdminMenu';
 import AdminPosts from './components/admin/AdminPosts';
+import AdminReports from './components/admin/AdminReports';
 import BoardsList from './components/BoardsList';
 import Board from './components/Board';
 import Thread from './components/Thread';
+import ReportForm from './components/ReportForm';
 
 function App() {
   const {addToast} = useToasts();
@@ -76,13 +78,27 @@ function App() {
             }
           </React.Fragment>
         )}/>
+        <Route exact path="/posts/:post_id/report" render={({match}) => (
+          <React.Fragment>
+            {!config.data
+              ? <span></span>
+              : <ReportForm config={config} post_id={match.params.post_id} />
+            }
+          </React.Fragment>
+        )}/>
         <Route exact path="/admin/posts" render={({match}) => (
           <React.Fragment>
             {!config.data || !boards.data
               ? <span></span>
-              : <AdminPosts
-                  config={config}
-                />
+              : <AdminPosts config={config} />
+            }
+          </React.Fragment>
+        )}/>
+        <Route exact path="/admin/reports" render={({match}) => (
+          <React.Fragment>
+            {!config.data || !boards.data
+              ? <span></span>
+              : <AdminReports config={config} />
             }
           </React.Fragment>
         )}/>

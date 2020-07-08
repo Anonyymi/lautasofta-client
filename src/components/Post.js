@@ -1,5 +1,6 @@
 import React from 'react';
 import './Post.css';
+import PostMenu from './PostMenu';
 
 function Post(props) {
   let selectPost = async (e) => {
@@ -32,6 +33,7 @@ function Post(props) {
           : <a className="post_id_link" href={'/boards/' + props.board_path + '/threads/' + props.post.thread_id}>{'No.'}</a>
         }
         <a className="post_id_ref" href="#/" onClick={referPost}>{props.post.id}</a>
+        <PostMenu icon="▶" post_id={props.post.id} />
       </div>
       <div className="post_content">
         {props.post.data_filepath != null &&

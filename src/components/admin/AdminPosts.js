@@ -44,7 +44,7 @@ function AdminPosts(props) {
     }
   };
 
-  const setSearchFormDeleted = async () => {
+  const toggleSearchFormDeleted = async () => {
     setSearchForm({...searchForm, deleted: !searchForm.deleted});
   };
 
@@ -56,7 +56,7 @@ function AdminPosts(props) {
           <React.Fragment>
             <div className="admin_posts_header_container">
               <p className="admin_posts_filter_title">Filter all posts</p>
-              <input type="checkbox" name="filter_deleted" checked={searchForm.deleted} onChange={setSearchFormDeleted} />
+              <input type="checkbox" name="filter_deleted" checked={searchForm.deleted} onChange={toggleSearchFormDeleted} />
               <label>Deleted</label>
             </div>
             <hr />

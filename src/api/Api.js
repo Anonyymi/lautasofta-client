@@ -48,11 +48,9 @@ async function postThread(board_id, message, file) {
   let result = {status: 404, data: {}};
 
   try {
-    let file_extension = file != null ? file.name.split('.').pop() : null;
-
-    let result = await axios.post(Config.api_url + '/boards/' + board_id + '/threads', {
+    result = await axios.post(Config.api_url + '/boards/' + board_id + '/threads', {
       message: message,
-      extension: file_extension
+      extension: file != null ? file.name.split('.').pop() : null
     });
     result = result.data;
 
@@ -80,6 +78,19 @@ async function postThread(board_id, message, file) {
   return result;
 }
 
+async function getPost(post_id) {
+  let post = {status: 404, data: []};
+
+  try {
+    post = await axios(Config.api_url + '/posts/' + post_id);
+    post = post.data;
+  } catch (err) {
+    throw err.response;
+  }
+
+  return post;
+}
+
 async function getPosts(board_id, thread_id, limit, offset) {
   let posts = {status: 404, data: []};
 
@@ -100,11 +111,9 @@ async function postPost(board_id, thread_id, message, file) {
   let result = {status: 404, data: {}};
 
   try {
-    let file_extension = file != null ? file.name.split('.').pop() : null;
-
-    let result = await axios.post(Config.api_url + '/boards/' + board_id + '/threads/' + thread_id + '/posts', {
+    result = await axios.post(Config.api_url + '/boards/' + board_id + '/threads/' + thread_id + '/posts', {
       message: message,
-      extension: file_extension
+      extension: file != null ? file.name.split('.').pop() : null
     });
     result = result.data;
 
@@ -145,14 +154,32 @@ async function deletePost(post_id) {
   return deleted;
 }
 
+async function postReport(post_id, reason) {
+  let result = {status: 404, data: {}};
+
+  try {
+    result = await axios.post(Config.api_url + '/reports', {
+      post_id: post_id,
+      reason: reason
+    });
+    result = result.data;
+  } catch (err) {
+    throw err.response;
+  }
+
+  return result;
+}
+
 const Api = {
   getConfig: getConfig,
   getBoards: getBoards,
   getThreads: getThreads,
   postThread: postThread,
+  getPost: getPost,
   getPosts: getPosts,
   postPost: postPost,
-  deletePost: deletePost
+  deletePost: deletePost,
+  postReport: postReport
 }
 
 export default Api;
