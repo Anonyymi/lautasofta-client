@@ -9,11 +9,11 @@
 
 .post_menu {
   display: inline-block;
-  position: relative;
+  position: absolute;
 }
 
 .post_menu ul {
-  position: fixed;
+  position: relative;
   margin: 0px;
   padding: 0px;
   list-style: none;
