@@ -34,7 +34,7 @@ function PostForm(props) {
   };
 
   return (
-    <form className="post_form" onSubmit={onSubmit}>
+    <form className="post_form" onSubmit={onSubmit} autoComplete="off">
       <label>File</label>
       <input id="post_form_file" name="file" type="file" accept={props.config.data['MEDIA_CONTENT_TYPES'].join(',')} onChange={onChangeFile}></input>
       <label></label>

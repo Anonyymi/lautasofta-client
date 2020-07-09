@@ -32,7 +32,7 @@ function DeleteForm(props) {
   };
 
   return (
-    <form className="delete_form" onSubmit={onSubmit}>
+    <form className="delete_form" onSubmit={onSubmit} autoComplete="off">
       <label>Delete Post</label>
       <input id="submit_delete" type="submit" value="Submit"></input>
     </form>

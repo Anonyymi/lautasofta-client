@@ -45,7 +45,7 @@ function ReportForm(props) {
   };
 
   return (
-    <form className="report_form" onSubmit={onSubmit}>
+    <form className="report_form" onSubmit={onSubmit} autoComplete="off">
       <p className="report_form_title">Report post</p>
       <Post config={props.config} post={post.data} selected={[]} />
       <label>Reason</label>
