@@ -14,7 +14,10 @@ import './App.css';
 import Api from './api/Api';
 import AdminMenu from './components/admin/AdminMenu';
 import AdminPosts from './components/admin/AdminPosts';
+import AdminPostPreview from './components/admin/AdminPostPreview';
 import AdminReports from './components/admin/AdminReports';
+import AdminBans from './components/admin/AdminBans';
+import AdminBanForm from './components/admin/AdminBanForm';
 import BoardsList from './components/BoardsList';
 import Board from './components/Board';
 import Thread from './components/Thread';
@@ -94,11 +97,35 @@ function App() {
             }
           </React.Fragment>
         )}/>
+        <Route exact path="/admin/posts/:post_id" render={({match}) => (
+          <React.Fragment>
+            {!config.data || !boards.data
+              ? <span></span>
+              : <AdminPostPreview config={config} post_id={match.params.post_id} />
+            }
+          </React.Fragment>
+        )}/>
+        <Route exact path="/admin/posts/:post_id/ban" render={({match}) => (
+          <React.Fragment>
+            {!config.data
+              ? <span></span>
+              : <AdminBanForm config={config} post_id={match.params.post_id} />
+            }
+          </React.Fragment>
+        )}/>
         <Route exact path="/admin/reports" render={({match}) => (
           <React.Fragment>
             {!config.data || !boards.data
               ? <span></span>
               : <AdminReports config={config} />
+            }
+          </React.Fragment>
+        )}/>
+        <Route exact path="/admin/bans" render={({match}) => (
+          <React.Fragment>
+            {!config.data || !boards.data
+              ? <span></span>
+              : <AdminBans config={config} />
             }
           </React.Fragment>
         )}/>

@@ -3,7 +3,6 @@ import {
   useToasts
 } from 'react-toast-notifications';
 import Api from '../../api/Api';
-import AdminApi from '../../api/AdminApi';
 import './DeleteForm.css';
 
 function DeleteForm(props) {

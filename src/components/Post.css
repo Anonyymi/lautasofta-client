@@ -33,6 +33,12 @@
   white-space: pre-line;
 }
 
+.post_content .post_ban_reason {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #ff0000;
+}
+
 .post_content .post_clear {
   clear: both;
 }

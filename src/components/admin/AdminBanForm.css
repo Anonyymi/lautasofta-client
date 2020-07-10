@@ -1,18 +1,18 @@
-.report_form label {
+.admin_ban_form label {
   margin-right: 4px;
 }
 
-.report_form input {
+.admin_ban_form input {
   margin-right: 4px;
 }
 
-.report_form_title {
+.admin_ban_form_title {
   margin: 0px;
   padding: 0px;
   font-weight: bold;
 }
 
-.report_form_container {
+.admin_ban_form_container {
   border: solid;
   border-width: 1px;
   border-style: dashed;

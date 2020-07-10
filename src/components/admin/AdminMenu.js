@@ -8,7 +8,8 @@ function AdminMenu(props) {
       <span className="admin_menu_title">ADMIN </span>
       <div className="admin_menu_item">
         <a href="/admin/posts">posts </a>
-        <a href="/admin/reports">reports</a>
+        <a href="/admin/reports">reports </a>
+        <a href="/admin/bans">bans</a>
       </div>
       <span>]</span>
     </div>

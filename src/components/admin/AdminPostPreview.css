@@ -1,0 +1,25 @@
+.admin_post_preview label {
+  margin-right: 4px;
+}
+
+.admin_post_preview input {
+  margin-right: 4px;
+}
+
+.admin_post_preview_title_admin {
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+}
+
+.admin_post_preview_title_normal {
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+}
+
+.admin_post_preview_container {
+  border: solid;
+  border-width: 1px;
+  border-style: dashed;
+}

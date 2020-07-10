@@ -19,6 +19,10 @@ function Post(props) {
 
   let referPost = async (e) => {
     let post_form_message = document.getElementById('post_form_message');
+
+    if (post_form_message == null)
+      return;
+
     post_form_message.value += '>>' + props.post.id + '\n';
   };
 
@@ -50,6 +54,9 @@ function Post(props) {
           </div>
         }
         <div className="post_message">{props.post.data_message}</div>
+        {props.post.ban_reason &&
+          <div className="post_ban_reason">User was banned for this post (Reason: {props.post.ban_reason})</div>
+        }
         <div className="post_clear"></div>
       </div>
     </div>

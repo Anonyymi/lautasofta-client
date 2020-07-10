@@ -14,6 +14,10 @@
   margin-right: 4px;
 }
 
+.admin_post_info .admin_post_id_ref {
+  font-weight: bold;
+}
+
 .admin_post_info .admin_post_name {
   font-weight: bold;
   color: #117743;

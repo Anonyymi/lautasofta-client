@@ -47,10 +47,12 @@ function ReportForm(props) {
   return (
     <form className="report_form" onSubmit={onSubmit} autoComplete="off">
       <p className="report_form_title">Report post</p>
-      <Post config={props.config} post={post.data} selected={[]} />
-      <label>Reason</label>
-      <input id="report_form_reason" name="reason" type="text"></input>
-      <input id="submit_report" type="submit" value="Submit"></input>
+      <div className="report_form_container">
+        <Post config={props.config} post={post.data} selected={[]} />
+        <label>Reason</label>
+        <input id="report_form_reason" name="reason" type="text"></input>
+        <input id="submit_report" type="submit" value="Submit" disabled={post.data.ban_reason != null}></input>
+      </div>
     </form>
   );
 }

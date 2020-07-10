@@ -55,7 +55,7 @@ async function putAdminReport(report_id, processed, admin_notes) {
   let result = {status: 404, data: {}};
 
   try {
-    result = await axios.put(Config.api_url + '/reports/' + report_id, {
+    result = await axios.put(Config.api_url + '/admin/reports/' + report_id, {
       processed: processed,
       admin_notes: admin_notes
     });
@@ -71,7 +71,7 @@ async function postAdminBan(report_id, post_id, reason, datetime_ends) {
   let result = {status: 404, data: {}};
 
   try {
-    result = await axios.post(Config.api_url + '/bans', {
+    result = await axios.post(Config.api_url + '/admin/bans', {
       report_id: report_id,
       post_id: post_id,
       reason: reason,

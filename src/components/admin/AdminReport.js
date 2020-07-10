@@ -21,15 +21,14 @@ function AdminReport(props) {
     <div className="admin_report">
       <div className="admin_report_info">
         <input className="admin_report_select" type="checkbox" name="select" onClick={selectReport}></input>
+        <span className="admin_report_id_ref">r#{props.report.id}</span>
+        <span className="admin_report_id_ref">p#{props.report.post_id}</span>
         <span className="admin_report_ipv4_addr">{props.report.ipv4_addr}</span>
         <span className="admin_report_datetime_created">{props.report.datetime_created}</span>
-        <span className="admin_report_id">{'Report No.'}</span>
-        <span className="admin_report_id_ref">{props.report.id}</span>
-        <span className="admin_report_post_id">{'Post No.'}</span>
-        <span className="admin_report_post_id_ref">{props.report.post_id}</span>
         <DropMenu icon="▶" menu_items={[
-          {id: 0, href: '#/', text: 'Ban poster'},
-          {id: 1, href: '#/', text: '...'}
+          {id: 0, href: '/admin/posts/' + props.report.post_id, text: 'Preview post'},
+          {id: 1, href: '/admin/posts/' + props.report.post_id + '/ban', text: 'Ban poster'},
+          {id: 2, href: '#/', text: '...'}
         ]} />
       </div>
       <div className="admin_report_content">
