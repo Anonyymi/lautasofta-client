@@ -1,6 +1,6 @@
 import React from 'react';
 import './Post.css';
-import PostMenu from './PostMenu';
+import DropMenu from './common/DropMenu';
 
 function Post(props) {
   let selectPost = async (e) => {
@@ -33,7 +33,10 @@ function Post(props) {
           : <a className="post_id_link" href={'/boards/' + props.board_path + '/threads/' + props.post.thread_id}>{'No.'}</a>
         }
         <a className="post_id_ref" href="#/" onClick={referPost}>{props.post.id}</a>
-        <PostMenu icon="▶" post_id={props.post.id} />
+        <DropMenu icon="▶" menu_items={[
+          {id: 0, href: '/posts/' + props.post.id + '/report', text: 'Report post'},
+          {id: 1, href: '#/', text: '...'}
+        ]} />
       </div>
       <div className="post_content">
         {props.post.data_filepath != null &&

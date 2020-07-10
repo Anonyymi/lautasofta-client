@@ -1,18 +1,18 @@
-.post_menu_btn {
+.drop_menu_btn {
   transition: transform 0.1s;
   display: inline-block;
 }
 
-.post_menu_btn_opened {
+.drop_menu_btn_opened {
   transform: rotate(90deg);
 }
 
-.post_menu {
+.drop_menu {
   display: inline-block;
   position: absolute;
 }
 
-.post_menu ul {
+.drop_menu ul {
   position: relative;
   margin: 0px;
   padding: 0px;
@@ -21,7 +21,7 @@
   border-right-width: 2px;
 }
 
-.post_menu ul li {
+.drop_menu ul li {
   padding: 2px 4px;
   background-color: rgb(204, 204, 204);
   border-bottom: 1px solid rgb(153, 153, 153);

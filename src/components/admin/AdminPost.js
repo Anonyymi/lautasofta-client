@@ -1,5 +1,6 @@
 import React from 'react';
 import './AdminPost.css';
+import DropMenu from '../common/DropMenu';
 
 function AdminPost(props) {
   let selectPost = async (e) => {
@@ -25,6 +26,10 @@ function AdminPost(props) {
         <span className="admin_post_datetime_created">{props.post.datetime_created}</span>
         <span className="admin_post_id">{'No.'}</span>
         <span className="admin_post_id_ref">{props.post.id}</span>
+        <DropMenu icon="▶" menu_items={[
+          {id: 0, href: '#/', text: 'Ban poster'},
+          {id: 1, href: '#/', text: '...'}
+        ]} />
       </div>
       <div className="admin_post_content">
         {props.post.data_filepath != null &&

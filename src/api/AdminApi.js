@@ -35,9 +35,62 @@ async function getAdminReports(limit, offset) {
   return reports;
 }
 
+async function getAdminBans(limit, offset) {
+  let bans = {status: 404, data: []};
+
+  try {
+    bans = await axios(Config.api_url + '/admin/bans?' + qs.stringify({
+      limit: limit,
+      offset: offset
+    }, {encode: false}));
+    bans = bans.data;
+  } catch (err) {
+    throw err.response;
+  }
+
+  return bans;
+}
+
+async function putAdminReport(report_id, processed, admin_notes) {
+  let result = {status: 404, data: {}};
+
+  try {
+    result = await axios.put(Config.api_url + '/reports/' + report_id, {
+      processed: processed,
+      admin_notes: admin_notes
+    });
+    result = result.data;
+  } catch (err) {
+    throw err.response;
+  }
+
+  return result;
+}
+
+async function postAdminBan(report_id, post_id, reason, datetime_ends) {
+  let result = {status: 404, data: {}};
+
+  try {
+    result = await axios.post(Config.api_url + '/bans', {
+      report_id: report_id,
+      post_id: post_id,
+      reason: reason,
+      datetime_ends: datetime_ends
+    });
+    result = result.data;
+  } catch (err) {
+    throw err.response;
+  }
+
+  return result;
+}
+
 const AdminApi = {
   getAdminPosts: getAdminPosts,
-  getAdminReports: getAdminReports
+  getAdminReports: getAdminReports,
+  getAdminBans: getAdminBans,
+  putAdminReport: putAdminReport,
+  postAdminBan: postAdminBan
 }
 
 export default AdminApi;

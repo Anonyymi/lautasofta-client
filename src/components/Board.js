@@ -11,7 +11,7 @@ import Api from '../api/Api';
 import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
-import DeleteForm from './DeleteForm';
+import DeleteForm from './common/DeleteForm';
 import Pagination from './Pagination';
 
 function Board(props) {
@@ -72,7 +72,7 @@ function Board(props) {
                 <Pagination pages={10} items={props.config.data['MAX_THREADS_PER_PAGE']} />
               </div>
               <div className="board_footer_container_right">
-                <DeleteForm selected={selected} />
+                <DeleteForm type="post" text="Delete Post" selected={selected} />
               </div>
             </div>
           </React.Fragment>

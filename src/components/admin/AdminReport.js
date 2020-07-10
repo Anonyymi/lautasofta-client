@@ -1,5 +1,6 @@
 import React from 'react';
 import './AdminReport.css';
+import DropMenu from '../common/DropMenu';
 
 function AdminReport(props) {
   let selectReport = async (e) => {
@@ -26,6 +27,10 @@ function AdminReport(props) {
         <span className="admin_report_id_ref">{props.report.id}</span>
         <span className="admin_report_post_id">{'Post No.'}</span>
         <span className="admin_report_post_id_ref">{props.report.post_id}</span>
+        <DropMenu icon="▶" menu_items={[
+          {id: 0, href: '#/', text: 'Ban poster'},
+          {id: 1, href: '#/', text: '...'}
+        ]} />
       </div>
       <div className="admin_report_content">
         <div className="admin_report_reason">{props.report.data_reason}</div>

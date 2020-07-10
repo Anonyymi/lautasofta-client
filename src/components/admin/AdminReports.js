@@ -9,7 +9,7 @@ import qs from 'query-string';
 import './AdminReports.css';
 import AdminApi from '../../api/AdminApi';
 import AdminReport from './AdminReport';
-import DeleteForm from '../DeleteForm';
+import DeleteForm from '../common/DeleteForm';
 import Pagination from '../Pagination';
 
 function AdminReports(props) {
@@ -63,7 +63,7 @@ function AdminReports(props) {
                 <Pagination pages={10} items={props.config.data['MAX_POSTS_PER_PAGE']} />
               </div>
               <div className="admin_reports_footer_container_right">
-                <DeleteForm selected={selected} />
+                <DeleteForm type="admin_report" text="Delete Report" selected={selected} />
               </div>
             </div>
           </React.Fragment>

@@ -11,7 +11,7 @@ import Api from '../api/Api';
 import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
-import DeleteForm from './DeleteForm';
+import DeleteForm from './common/DeleteForm';
 
 function Thread(props) {
   const {addToast} = useToasts();
@@ -63,7 +63,7 @@ function Thread(props) {
               </React.Fragment>
             ))}
             <div className="thread_footer_container">
-              <DeleteForm selected={selected} />
+                <DeleteForm type="post" text="Delete Post" selected={selected} />
             </div>
           </React.Fragment>
       }
