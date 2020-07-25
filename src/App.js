@@ -12,16 +12,16 @@ import {
 } from 'react-toast-notifications';
 import './App.css';
 import Api from './api/Api';
+import BoardsList from './components/BoardsList';
+import Board from './components/Board';
+import Thread from './components/Thread';
+import ReportForm from './components/ReportForm';
 import AdminMenu from './components/admin/AdminMenu';
 import AdminPosts from './components/admin/AdminPosts';
 import AdminPostPreview from './components/admin/AdminPostPreview';
 import AdminReports from './components/admin/AdminReports';
 import AdminBans from './components/admin/AdminBans';
 import AdminBanForm from './components/admin/AdminBanForm';
-import BoardsList from './components/BoardsList';
-import Board from './components/Board';
-import Thread from './components/Thread';
-import ReportForm from './components/ReportForm';
 
 function App() {
   const {addToast} = useToasts();
@@ -35,12 +35,12 @@ function App() {
   }, []);
 
   const fetchDataFromAPI = async (board_id, thread_id) => {
-    try {
-      setConfig(await Api.getConfig());
-      setBoards(await Api.getBoards());
-    } catch (err) {
-      addToast('Failure fetching config/boards!', {appearance: 'error'});
-    }
+    Api.getConfig()
+      .then(setConfig)
+      .catch(err => addToast('Failure fetching config/boards!', {appearance: 'error'}));
+    Api.getBoards()
+      .then(setBoards)
+      .catch(err => addToast('Failure fetching config/boards!', {appearance: 'error'}));
   };
 
   return (

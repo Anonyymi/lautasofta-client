@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'query-string';
-import Config from '../config/Config';
+import Config from '../Config';
 
 async function getConfig() {
   let config = {status: 404, data: {}};

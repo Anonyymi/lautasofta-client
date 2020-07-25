@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'query-string';
-import Config from '../config/Config';
+import Config from '../Config';
 
 async function getAdminPosts(deleted, limit, offset) {
   let posts = {status: 404, data: []};
