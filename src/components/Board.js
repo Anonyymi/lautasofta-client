@@ -12,7 +12,7 @@ import BoardTitle from './BoardTitle';
 import PostForm from './PostForm';
 import Post from './Post';
 import DeleteForm from './common/DeleteForm';
-import Pagination from './Pagination';
+import Pagination from './common/Pagination';
 
 function Board(props) {
   const {addToast} = useToasts();
@@ -68,12 +68,9 @@ function Board(props) {
               </React.Fragment>
             ))}
             <div className="board_footer_container">
-              <div className="board_footer_container_left">
-                <Pagination pages={10} items={props.config.data['MAX_THREADS_PER_PAGE']} />
-              </div>
-              <div className="board_footer_container_right">
-                <DeleteForm type="post" text="Delete Post" selected={selected} />
-              </div>
+              <Pagination pages={10} items={props.config.data['MAX_THREADS_PER_PAGE']} />
+              <DeleteForm type="post" text="Delete Post" selected={selected} />
+              <div className="board_footer_container_clear"></div>
             </div>
           </React.Fragment>
       }

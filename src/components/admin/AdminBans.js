@@ -10,7 +10,7 @@ import './AdminBans.css';
 import AdminApi from '../../api/AdminApi';
 import AdminBan from './AdminBan';
 import DeleteForm from '../common/DeleteForm';
-import Pagination from '../Pagination';
+import Pagination from '../common/Pagination';
 
 function AdminBans(props) {
   const {addToast} = useToasts();

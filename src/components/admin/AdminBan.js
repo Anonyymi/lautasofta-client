@@ -29,8 +29,7 @@ function AdminBan(props) {
         <span className="admin_ban_datetime_starts">Starts: {props.ban.datetime_starts}</span>
         <span className="admin_ban_datetime_ends">Ends: {props.ban.datetime_ends}</span>
         <DropMenu icon="▶" menu_items={[
-          {id: 0, href: '/admin/posts/' + props.ban.post_id, text: 'Preview post'},
-          {id: 1, href: '#/', text: '...'}
+          {id: 0, href: '/admin/posts/' + props.ban.post_id, text: 'Preview post'}
         ]} />
       </div>
       <div className="admin_ban_content">

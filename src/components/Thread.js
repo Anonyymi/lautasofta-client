@@ -64,6 +64,7 @@ function Thread(props) {
             ))}
             <div className="thread_footer_container">
                 <DeleteForm type="post" text="Delete Post" selected={selected} />
+                <div className="thread_footer_container_clear"></div>
             </div>
           </React.Fragment>
       }

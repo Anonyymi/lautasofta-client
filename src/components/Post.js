@@ -38,8 +38,7 @@ function Post(props) {
         }
         <a className="post_id_ref" href="#/" onClick={referPost}>{props.post.id}</a>
         <DropMenu icon="▶" menu_items={[
-          {id: 0, href: '/posts/' + props.post.id + '/report', text: 'Report post'},
-          {id: 1, href: '#/', text: '...'}
+          {id: 0, href: '/posts/' + props.post.id + '/report', text: 'Report post'}
         ]} />
       </div>
       <div className="post_content">

@@ -10,7 +10,7 @@ import './AdminPosts.css';
 import AdminApi from '../../api/AdminApi';
 import AdminPost from './AdminPost';
 import DeleteForm from '../common/DeleteForm';
-import Pagination from '../Pagination';
+import Pagination from '../common/Pagination';
 
 function AdminPosts(props) {
   const {addToast} = useToasts();

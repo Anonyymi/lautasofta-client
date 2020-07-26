@@ -2,14 +2,14 @@
   text-align: center;
 }
 
-.board_footer_container_left {
-  display: inline-block;
-  position: absolute;
-  left: 0px;
+.board_footer_container .pagination {
+  float: left;
 }
 
-.board_footer_container_right {
-  display: inline-block;
-  position: absolute;
-  right: 0px;
+.board_footer_container .delete_form {
+  float: right;
+}
+
+.board_footer_container .board_footer_container_clear {
+  clear: both;
 }

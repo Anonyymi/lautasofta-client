@@ -27,8 +27,7 @@ function AdminPost(props) {
         <span className="admin_post_datetime_created">{props.post.datetime_created}</span>
         <DropMenu icon="▶" menu_items={[
           {id: 0, href: '/admin/posts/' + props.post.id, text: 'Preview post'},
-          {id: 1, href: '/admin/posts/' + props.post.id + '/ban', text: 'Ban poster'},
-          {id: 2, href: '#/', text: '...'}
+          {id: 1, href: '/admin/posts/' + props.post.id + '/ban', text: 'Ban poster'}
         ]} />
       </div>
       <div className="admin_post_content">

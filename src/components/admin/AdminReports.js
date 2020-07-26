@@ -10,7 +10,7 @@ import './AdminReports.css';
 import AdminApi from '../../api/AdminApi';
 import AdminReport from './AdminReport';
 import DeleteForm from '../common/DeleteForm';
-import Pagination from '../Pagination';
+import Pagination from '../common/Pagination';
 
 function AdminReports(props) {
   const {addToast} = useToasts();

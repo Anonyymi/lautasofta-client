@@ -23,11 +23,10 @@ function BoardsList(props) {
         :
           <React.Fragment>
             <span>[</span>
+            <a href="/">index</a>
             {props.boards.data.map((item, idx) => {
               return <div key={item.id} className="boards_list_item">
-                {idx !== 0 &&
-                  <span> / </span>
-                }
+                <span> / </span>
                 <a href={'/boards/' + item.path}>{item.path}</a>
               </div>
             })}

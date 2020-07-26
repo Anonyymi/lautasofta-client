@@ -7,13 +7,14 @@
 }
 
 .admin_post_preview_title_admin {
-  margin: 0px;
+  margin: 16px 0px 8px 0px;
   padding: 0px;
   font-weight: bold;
 }
 
 .admin_post_preview_title_normal {
-  margin: 0px;
+  margin: 16px 0px 8px 0px;
+  margin-bottom: 8px;
   padding: 0px;
   font-weight: bold;
 }
