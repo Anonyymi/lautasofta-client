@@ -25,6 +25,7 @@
 }
 
 .post_content .post_message {
+  float: left;
   white-space: pre-line;
 }
 

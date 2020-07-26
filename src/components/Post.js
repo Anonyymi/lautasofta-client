@@ -1,5 +1,8 @@
 import React from 'react';
+import BBCode from '@bbob/react/es/Component'
+import reactPreset from '@bbob/preset-react/es'
 import './Post.css';
+import Config from '../Config';
 import DropMenu from './common/DropMenu';
 
 function Post(props) {
@@ -52,7 +55,11 @@ function Post(props) {
             </a>
           </div>
         }
-        <div className="post_message">{props.post.data_message}</div>
+        <div className="post_message">
+          <BBCode plugins={[reactPreset()]} options={{onlyAllowTags: Config.ui_bbcode_tags}}>
+            {props.post.data_message}
+          </BBCode>
+        </div>
         {props.post.ban_reason &&
           <div className="post_ban_reason">User was banned for this post (Reason: {props.post.ban_reason})</div>
         }

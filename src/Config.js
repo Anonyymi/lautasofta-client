@@ -1,8 +1,11 @@
 const Config = {
-  api_url: 'http://localhost:3002',
+  api_url: 'https://api.lautasofta.net',
   ui_themes: [
     'yotsuba',
     'yotsuba_blue'
+  ],
+  ui_bbcode_tags: [
+    'b', 'i', 'u', 's', 'quote', 'url', 'code' 
   ]
 };
 
