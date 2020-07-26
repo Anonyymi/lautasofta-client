@@ -2,10 +2,6 @@
   margin-bottom: 4px;
 }
 
-.admin_ban_info {
-  background: rgba(0, 0, 0, 0.2);
-}
-
 .admin_ban_info span {
   margin-right: 4px;
 }
@@ -20,22 +16,18 @@
 
 .admin_ban_info .admin_ban_ipv4_addr {
   font-weight: bold;
-  color: #431177;
 }
 
 .admin_ban_info .admin_ban_banned_ipv4_addr {
   font-weight: bold;
-  color: #ff0000;
 }
 
 .admin_ban_info .admin_ban_datetime_starts {
   font-weight: bold;
-  color: #ff0000;
 }
 
 .admin_ban_info .admin_ban_datetime_ends {
   font-weight: bold;
-  color: #117743;
 }
 
 .admin_ban_content .admin_ban_reason {

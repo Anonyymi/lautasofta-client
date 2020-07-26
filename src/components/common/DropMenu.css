@@ -17,12 +17,9 @@
   margin: 0px;
   padding: 0px;
   list-style: none;
-  border: 1px solid rgb(153, 153, 153);
   border-right-width: 2px;
 }
 
 .drop_menu ul li {
   padding: 2px 4px;
-  background-color: rgb(204, 204, 204);
-  border-bottom: 1px solid rgb(153, 153, 153);
 }

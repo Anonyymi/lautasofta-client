@@ -11,6 +11,7 @@ import {
   useToasts
 } from 'react-toast-notifications';
 import './App.css';
+import ThemeSelector from './components/common/ThemeSelector';
 import Api from './api/Api';
 import BoardsList from './components/BoardsList';
 import Board from './components/Board';
@@ -50,6 +51,7 @@ function App() {
           <AdminMenu />
         }
         <BoardsList boards={boards} />
+        <ThemeSelector />
         <div className="menu_container_clear"></div>
       </div>
       <Switch>

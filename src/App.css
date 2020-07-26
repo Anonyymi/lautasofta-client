@@ -2,18 +2,6 @@ body {
   font-size: 10pt;
 }
 
-a {
-  text-decoration: none;
-}
-
-a, a:visited {
-  color: inherit;
-}
-
-a:hover, a:active {
-  color: rgba(128, 128, 128, 1.0);
-}
-
 .menu_container .admin_menu {
   float: left;
   margin-right: 4px;
@@ -21,6 +9,10 @@ a:hover, a:active {
 
 .menu_container .boards_list {
   float: left;
+}
+
+.menu_container .theme_selector {
+  float: right;
 }
 
 .menu_container .menu_container_clear {

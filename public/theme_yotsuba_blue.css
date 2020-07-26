@@ -1,0 +1,84 @@
+/* global html body */
+body {
+  background: #FCFCFF linear-gradient(to bottom, rgba(200, 211, 244, 1.0) 0, #fff 128px) no-repeat 0 0 local;
+  color: rgba(0, 11, 100, 1.0);
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+
+a, a:visited {
+  color: inherit;
+}
+
+a:hover, a:active {
+  color: rgba(90, 100, 144, 1.0);
+}
+
+/* post */
+.reply {
+  background: rgba(200, 211, 244, 1.0);
+}
+
+.post_info .post_name {
+  color: #117743;
+}
+
+.post_content .post_ban_reason {
+  color: #ff0000;
+}
+
+/* admin post */
+.admin_post_info {
+  background: rgba(200, 211, 244, 1.0);
+}
+
+.admin_post_info .admin_post_name {
+  color: #117743;
+}
+
+.admin_post_info .admin_post_ipv4_addr {
+  color: #431177;
+}
+
+/* admin report */
+.admin_report_info {
+  background: rgba(200, 211, 244, 1.0);
+}
+
+.admin_report_info .admin_report_ipv4_addr {
+  color: #431177;
+}
+
+/* admin ban */
+.admin_ban_info {
+  background: rgba(200, 211, 244, 1.0);
+}
+
+.admin_ban_info .admin_ban_ipv4_addr {
+  color: #431177;
+}
+
+.admin_ban_info .admin_ban_banned_ipv4_addr {
+  color: #ff0000;
+}
+
+.admin_ban_info .admin_ban_datetime_starts {
+  color: #ff0000;
+}
+
+.admin_ban_info .admin_ban_datetime_ends {
+  color: #117743;
+}
+
+/* drop menu */
+.drop_menu ul {
+  border: 1px solid rgb(150, 166, 200);
+}
+
+.drop_menu ul li {
+  background: rgba(200, 211, 244, 1.0);
+  border-bottom: 1px solid rgb(150, 166, 200);
+}
