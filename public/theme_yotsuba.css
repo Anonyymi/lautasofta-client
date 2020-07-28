@@ -31,24 +31,13 @@ a:hover, a:active {
 }
 
 /* post::bbcode */
-.post_content .post_message pre {
+/*.post_content .post_message pre {
   border: 1px solid rgb(200, 166, 150);
-}
-
-.post_content .post_message blockquote {
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
 }
 
 .post_content .post_message blockquote p {
   border: 1px solid rgb(200, 166, 150);
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
+}*/
 
 /* admin post */
 .admin_post_info {

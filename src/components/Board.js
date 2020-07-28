@@ -1,6 +1,7 @@
 import React, {
   useState,
-  useEffect
+  useEffect,
+  useCallback
 } from 'react';
 import {
   useToasts
@@ -16,52 +17,49 @@ import Pagination from './common/Pagination';
 
 function Board(props) {
   const {addToast} = useToasts();
-  const [render, setRender] = useState(false);
-  const [threads, setThreads] = useState({'status': 404, data: []});
+  const [board, setBoard] = useState(null);
+  const [threads, setThreads] = useState({status: 404, data: []});
   const [selected] = useState([]);
 
-  useEffect(() => {
-    if (props.config && props.board) {
-      setRender(true);
-    } else {
-      setRender(false);
+  const fetchData = useCallback(async (limit, offset) => {
+    if (board == null)
       return;
+    
+    try {
+      setThreads(await Api.getThreads(board.id, limit, offset));
+    } catch (err) {
+      addToast('Failure fetching board data, status: ' + err.status, {appearance: 'error'});
     }
+  }, [board, addToast]);
+
+  useEffect(() => {
+    // get current board via path
+    setBoard(props.boards.data.find(b => b.path === props.board_path));
 
     // parse params from query string
     let qs_parsed = qs.parse(window.location.search);
 
-      // fetch data from api
-    fetchDataFromAPI(props.board.id, qs_parsed['limit'], qs_parsed['offset']);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.board, window.location.search]);
-
-  const fetchDataFromAPI = async (board_id, limit, offset) => {
-    try {
-      setThreads(await Api.getThreads(props.board.id, limit, offset));
-    } catch (err) {
-      addToast('Failure fetching board data, status: ' + err.status, {appearance: 'error'});
-    }
-  };
+    // fetch data from api
+    fetchData(qs_parsed['limit'], qs_parsed['offset']);
+  }, [props.boards, props.board_path, fetchData]);
 
   return (
     <div className="board">
-      {render === false
+      {board == null
         ? <span></span>
         :
           <React.Fragment>
             <div className="board_header_container">
-              <BoardTitle board={props.board} />
-              <PostForm config={props.config} board={props.board} />
+              <BoardTitle board={board} />
+              <PostForm config={props.config} board={board} />
             </div>
             <hr />
             {threads.data.map(thread => (
               <React.Fragment key={thread.id}>
                 <div className="board_thread">
-                  <Post config={props.config} board_path={props.board.path} post={thread} selected={selected} />
+                  <Post config={props.config} board_path={board.path} post={thread} selected={selected} />
                   {thread.posts.map(post => (
-                    <Post key={post.id} config={props.config} board_path={props.board.path} post={post} selected={selected} />
+                    <Post key={post.id} config={props.config} board_path={board.path} post={post} selected={selected} />
                   ))}
                 </div>
                 <hr />

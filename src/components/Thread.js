@@ -1,6 +1,7 @@
 import React, {
   useState,
-  useEffect
+  useEffect,
+  useCallback
 } from 'react';
 import {
   useToasts
@@ -15,50 +16,47 @@ import DeleteForm from './common/DeleteForm';
 
 function Thread(props) {
   const {addToast} = useToasts();
-  const [render, setRender] = useState(false);
-  const [posts, setPosts] = useState({'status': 404, data: []});
+  const [board, setBoard] = useState(null);
+  const [posts, setPosts] = useState({status: 404, data: []});
   const [selected] = useState([]);
 
-  useEffect(() => {
-    if (props.config && props.board && props.thread_id) {
-      setRender(true);
-    } else {
-      setRender(false);
+  const fetchData = useCallback(async (limit, offset) => {
+    if (board == null || props.thread_id == null)
       return;
+    
+    try {
+      setPosts(await Api.getPosts(board.id, props.thread_id, limit, offset));
+    } catch (err) {
+      addToast('Failure fetching thread data, status: ' + err.status, {appearance: 'error'});
     }
+  }, [board, props.thread_id, addToast]);
+
+  useEffect(() => {
+    // get current board via path
+    setBoard(props.boards.data.find(b => b.path === props.board_path));
 
     // parse params from query string
     let qs_parsed = qs.parse(window.location.search);
 
-      // fetch data from api
-    fetchDataFromAPI(props.board.id, props.thread_id, qs_parsed['limit'], qs_parsed['offset']);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.board, props.thread_id, window.location.search]);
-
-  const fetchDataFromAPI = async (board_id, thread_id, limit, offset) => {
-    try {
-      setPosts(await Api.getPosts(props.board.id, props.thread_id, limit, offset));
-    } catch (err) {
-      addToast('Failure fetching thread data, status: ' + err.status, {appearance: 'error'});
-    }
-  };
+    // fetch data from api
+    fetchData(qs_parsed['limit'], qs_parsed['offset']);
+  }, [props.boards, props.board_path, fetchData]);
 
   return (
     <div className="thread">
-      {render === false
+      {board == null
         ? <span></span>
         :
           <React.Fragment>
             <div className="thread_header_container">
-              <BoardTitle board={props.board} />
-              <PostForm config={props.config} board={props.board} thread_id={props.thread_id} />
+              <BoardTitle board={board} />
+              <PostForm config={props.config} board={board} thread_id={props.thread_id} />
             </div>
             <hr />
             {posts.data.map(post => (
               <React.Fragment key={post.id}>
                 <div className="thread_post">
-                  <Post config={props.config} board_path={props.board.path} post={post} selected={selected} />
+                  <Post config={props.config} board_path={board.path} post={post} selected={selected} />
                 </div>
               </React.Fragment>
             ))}

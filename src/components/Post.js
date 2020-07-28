@@ -61,7 +61,10 @@ function Post(props) {
           </BBCode>
         </div>
         {props.post.ban_reason &&
-          <div className="post_ban_reason">User was banned for this post (Reason: {props.post.ban_reason})</div>
+          <React.Fragment>
+            <div></div>
+            <div className="post_ban_reason">User was banned for this post (Reason: {props.post.ban_reason})</div>
+          </React.Fragment>
         }
         <div className="post_clear"></div>
       </div>

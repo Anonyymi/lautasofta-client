@@ -26,8 +26,8 @@ import AdminBanForm from './components/admin/AdminBanForm';
 
 function App() {
   const {addToast} = useToasts();
-  const [config, setConfig] = useState({'status': 404, data: {}});
-  const [boards, setBoards] = useState({'status': 404, data: []});
+  const [config, setConfig] = useState({status: 404, data: null});
+  const [boards, setBoards] = useState({status: 404, data: null});
 
   useEffect(() => {
     fetchDataFromAPI();
@@ -38,101 +38,67 @@ function App() {
   const fetchDataFromAPI = async (board_id, thread_id) => {
     Api.getConfig()
       .then(setConfig)
-      .catch(err => addToast('Failure fetching config/boards!', {appearance: 'error'}));
+      .catch(err => addToast('Failure fetching app config data, status: ' + err.status, {appearance: 'error'}));
     Api.getBoards()
       .then(setBoards)
-      .catch(err => addToast('Failure fetching config/boards!', {appearance: 'error'}));
+      .catch(err => addToast('Failure fetching app boards data, status: ' + err.status, {appearance: 'error'}));
   };
 
   return (
-    <Router>
-      <div className="menu_container">
-        {(config.data && config.data['USER_ROLE'] === 'ADMINISTRATOR') &&
-          <AdminMenu />
-        }
-        <BoardsList boards={boards} />
-        <ThemeSelector />
-        <div className="menu_container_clear"></div>
-      </div>
-      <Switch>
-        <Route exact path="/">
-          <span>index</span>
-        </Route>
-        <Route exact path="/boards/:board_path" render={({match}) => (
-          <React.Fragment>
-            {!config.data || !boards.data
-              ? <span></span>
-              : <Board
+    <div className="app">
+      {config.data == null || boards.data == null
+        ? <span></span>
+        :
+          <Router>
+            <div className="menu_container">
+              {(config.data['USER_ROLE'] === 'ADMINISTRATOR') &&
+                <AdminMenu />
+              }
+              <BoardsList boards={boards} />
+              <ThemeSelector />
+              <div className="menu_container_clear"></div>
+            </div>
+            <Switch>
+              <Route exact path="/">
+                <span>index</span>
+              </Route>
+              <Route exact path="/boards/:board_path" render={({match}) => (
+                <Board
                   config={config}
                   boards={boards}
-                  board={boards.data.find(board => board.path === match.params.board_path)}
+                  board_path={match.params.board_path}
                 />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/boards/:board_path/threads/:thread_id" render={({match}) => (
-          <React.Fragment>
-            {!config.data || !boards.data
-              ? <span></span>
-              : <Thread
+              )}/>
+              <Route exact path="/boards/:board_path/threads/:thread_id" render={({match}) => (
+                <Thread
                   config={config}
                   boards={boards}
-                  board={boards.data.find(board => board.path === match.params.board_path)}
+                  board_path={match.params.board_path}
                   thread_id={match.params.thread_id}
                 />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/posts/:post_id/report" render={({match}) => (
-          <React.Fragment>
-            {!config.data
-              ? <span></span>
-              : <ReportForm config={config} post_id={match.params.post_id} />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/admin/posts" render={({match}) => (
-          <React.Fragment>
-            {!config.data || !boards.data
-              ? <span></span>
-              : <AdminPosts config={config} />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/admin/posts/:post_id" render={({match}) => (
-          <React.Fragment>
-            {!config.data || !boards.data
-              ? <span></span>
-              : <AdminPostPreview config={config} post_id={match.params.post_id} />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/admin/posts/:post_id/ban" render={({match}) => (
-          <React.Fragment>
-            {!config.data
-              ? <span></span>
-              : <AdminBanForm config={config} post_id={match.params.post_id} />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/admin/reports" render={({match}) => (
-          <React.Fragment>
-            {!config.data || !boards.data
-              ? <span></span>
-              : <AdminReports config={config} />
-            }
-          </React.Fragment>
-        )}/>
-        <Route exact path="/admin/bans" render={({match}) => (
-          <React.Fragment>
-            {!config.data || !boards.data
-              ? <span></span>
-              : <AdminBans config={config} />
-            }
-          </React.Fragment>
-        )}/>
-      </Switch>
-    </Router>
+              )}/>
+              <Route exact path="/posts/:post_id/report" render={({match}) => (
+                <ReportForm config={config} post_id={match.params.post_id} />
+              )}/>
+              <Route exact path="/admin/posts" render={({match}) => (
+                <AdminPosts config={config} />
+              )}/>
+              <Route exact path="/admin/posts/:post_id" render={({match}) => (
+                <AdminPostPreview config={config} post_id={match.params.post_id} />
+              )}/>
+              <Route exact path="/admin/posts/:post_id/ban" render={({match}) => (
+                <AdminBanForm config={config} post_id={match.params.post_id} />
+              )}/>
+              <Route exact path="/admin/reports" render={({match}) => (
+                <AdminReports config={config} />
+              )}/>
+              <Route exact path="/admin/bans" render={({match}) => (
+                <AdminBans config={config} />
+              )}/>
+            </Switch>
+          </Router>
+      }
+    </div>
   );
 }
 
