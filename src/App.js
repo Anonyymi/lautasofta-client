@@ -74,20 +74,20 @@ function App() {
                   config={config}
                   boards={boards}
                   board_path={match.params.board_path}
-                  thread_id={match.params.thread_id}
+                  thread_id={parseInt(match.params.thread_id)}
                 />
               )}/>
               <Route exact path="/posts/:post_id/report" render={({match}) => (
-                <ReportForm config={config} post_id={match.params.post_id} />
+                <ReportForm config={config} post_id={parseInt(match.params.post_id)} />
               )}/>
               <Route exact path="/admin/posts" render={({match}) => (
                 <AdminPosts config={config} />
               )}/>
               <Route exact path="/admin/posts/:post_id" render={({match}) => (
-                <AdminPostPreview config={config} post_id={match.params.post_id} />
+                <AdminPostPreview config={config} post_id={parseInt(match.params.post_id)} />
               )}/>
               <Route exact path="/admin/posts/:post_id/ban" render={({match}) => (
-                <AdminBanForm config={config} post_id={match.params.post_id} />
+                <AdminBanForm config={config} post_id={parseInt(match.params.post_id)} />
               )}/>
               <Route exact path="/admin/reports" render={({match}) => (
                 <AdminReports config={config} />

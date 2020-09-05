@@ -75,7 +75,7 @@ async function postAdminBan(report_id, post_id, reason, datetime_ends) {
       report_id: report_id,
       post_id: post_id,
       reason: reason,
-      datetime_ends: datetime_ends
+      datetime_ends: datetime_ends.length > 0 ? datetime_ends : null
     });
     result = result.data;
   } catch (err) {

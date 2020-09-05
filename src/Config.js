@@ -1,5 +1,5 @@
 const Config = {
-  api_url: 'https://api.lautasofta.net',
+  api_url: 'http://localhost:80',
   ui_themes: [
     'yotsuba',
     'yotsuba_blue'
